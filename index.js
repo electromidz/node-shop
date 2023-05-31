@@ -13,9 +13,13 @@ mongoose.connection.on("open", () => {
   console.log("Establishing connection ...");
 });
 
-app.get("/", (req, res) => {
-  res.send("Welcome");
-});
+const ProductModel = require("./models/product");
+const newProduct = new ProductModel({ name: "new product" });
+async function saveProduct() {
+  await newProduct.save();
+}
+saveProduct();
+console.log("Product saved", newProduct);
 
 app.listen(port, () => {
   console.log("App listening on port " + port);
