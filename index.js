@@ -3,14 +3,18 @@ const app = express();
 const port = 8080;
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/siteUserAdmin");
+
+mongoose.connect("mongodb://localhost:27017/db-shop", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 mongoose.connection.on("error", (error) => {
   console.error(`Error connecting: ${error}`);
 });
 
 mongoose.connection.on("open", () => {
-  console.log("Establishing connection ...");
+  console.log("Establishing connected ...");
 });
 
 const ProductModel = require("./models/product");

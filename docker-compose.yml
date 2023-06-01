@@ -1,54 +1,12 @@
-# version: "3.3"
-# services:
-#   mongodb_server_lynx:
-#     image: mongo:4.4
-#     command: mongod --serviceExecutor adaptive --replSet rs1 --port 27017 --keyFile /etc/mongo-repl.key
-#     ports:
-#       - 27017:27017
-#     environment:
-#       - MONGO_INITDB_ROOT_USERNAME=admin_user
-#       - MONGO_INITDB_ROOT_PASSWORD=admin_pass
-#     volumes:
-#       - mongodb_server_lynx_data:/data/db
-#       - ./mongo-repl.key:/etc/mongo-repl.key
-#   mongodb_server_puma:
-#     image: mongo:4.4
-#     command: mongod --serviceExecutor adaptive --replSet rs1 --port 27017 --keyFile /etc/mongo-repl.key
-#     ports:
-#       - 27117:27017
-#     environment:
-#       - MONGO_INITDB_ROOT_USERNAME=admin_user
-#       - MONGO_INITDB_ROOT_PASSWORD=admin_pass
-#     volumes:
-#       - mongodb_server_puma_data:/data/db
-#       - ./mongo-repl.key:/etc/mongo-repl.key
-#   mongodb_server_wolf:
-#     image: mongo:4.4
-#     command: mongod --serviceExecutor adaptive --replSet rs1 --port 27017 --keyFile /etc/mongo-repl.key
-#     ports:
-#       - 27217:27017
-#     environment:
-#       - MONGO_INITDB_ROOT_USERNAME=admin_user
-#       - MONGO_INITDB_ROOT_PASSWORD=admin_pass
-#     volumes:
-#       - mongodb_server_wolf_data:/data/db
-#       - ./mongo-repl.key:/etc/mongo-repl.key
-# volumes:
-#   mongodb_server_lynx_data:
-#   mongodb_server_puma_data:
-#   mongodb_server_wolf_data
-version: "3.7"
+version: "3.0"
 services:
-  mongodb-Cont:
+  mongoDB:
     image: mongo:latest
-    container_name: mongoDB-Cont
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    container_name: mongoDB-shop
+    restart: always
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_cont:/data/db
-
+      - mongoDB:/data/db
 volumes:
-  mongodb_data_cont:
+  mongoDB: {}
