@@ -17,5 +17,6 @@ router.post("/register", async (req, res) => {
   await newUser.save();
   res.send(newUser);
 });
+router.post("/login", async (req, res) => {});
 
 module.exports = router;
