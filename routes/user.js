@@ -19,12 +19,12 @@ router.post("/register", async (req, res) => {
 });
 router.post("/login", async (req, res) => {
   const { email, phone, password } = req.body;
-  const foundUser = await UserModel.findOne({ $or: [{ email }, { phone }] });
-  if(foundUser) {
+  const foundUser = await userModel.findOne({ $or: [{ email }, { phone }] });
 
-  return res.send(foundUser);
-  }else {
-    res.send({'User not found'})
+  if (foundUser) {
+    return res.send(foundUser);
+  } else {
+    res.send({ error: "User not found" });
   }
 });
 
