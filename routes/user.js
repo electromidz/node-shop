@@ -19,12 +19,18 @@ router.post("/register", async (req, res) => {
 });
 router.post("/login", async (req, res) => {
   const { email, phone, password } = req.body;
-  const foundUser = await userModel.findOne({ $or: [{ email }, { phone }] });
+  const foundUser = await userModel.findOne({
+    $or: [{ email }, { phone }, { password }],
+  });
 
-  if (foundUser) {
+  const user = await bcrypt.compareSync(password, foundUser.password); // true
+
+  if (user && foundUser) {
     return res.send(foundUser);
+  } else if (!user) {
+    res.send({ error: "Wrong password" });
   } else {
-    res.send({ error: "User not found" });
+    res.send({ error: "User not found!" });
   }
 });
 
