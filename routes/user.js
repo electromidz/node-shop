@@ -12,11 +12,15 @@ async function hashPass(password) {
 
 router.post("/register", async (req, res) => {
   req.body.password = await hashPass(req.body.password);
-  // res.send(req.body);
   const newUser = new userModel(req.body);
-  await newUser.save();
-  res.status(201);
-  res.send(newUser);
+  if (newUser) {
+    await newUser.save();
+    res.status(201);
+    res.send(newUser);
+  }else {
+    res.status(404);
+    res.send(error:"Invalid form")
+  }
 });
 router.post("/login", async (req, res) => {
   const { email, phone, password } = req.body;
