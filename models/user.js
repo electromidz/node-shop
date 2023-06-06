@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     maxLength: 320,
     required: true,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    unique: true,
+    index: { unique: true, dropDups: true },
   },
   phone: {
     type: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     maxlength: 11,
     required: true,
     match: /09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/,
-    unique: true,
+    index: { unique: true, dropDups: true },
   },
   password: {
     type: String,

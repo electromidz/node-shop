@@ -1,6 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 const userModel = require("../models/user");
 
@@ -17,9 +19,9 @@ router.post("/register", async (req, res) => {
     await newUser.save();
     res.status(201);
     res.send(newUser);
-  }else {
+  } else {
     res.status(404);
-    res.send(error:"Invalid form")
+    res.send({ error: "Invalid form" });
   }
 });
 router.post("/login", async (req, res) => {
@@ -31,14 +33,21 @@ router.post("/login", async (req, res) => {
   const user = await bcrypt.compareSync(password, foundUser.password); // true
 
   if (user && foundUser) {
+    const token = jwt.sign(
+      { _id: foundUser._id, name: foundUser.name },
+      process.env.JWT_PRIVATE_KEY
+    );
+    const decode = jwt.decode(token);
+    console.log(decode);
+
     res.status(200);
-    return res.send(foundUser);
+    return res.send(token);
   } else if (!user) {
     res.status(401);
     res.send({ error: "Wrong password" });
   } else {
-    res.status(404);
-    res.send({ error: "User not found!" });
+    res.status(401);
+    res.send({ error: "Wrong password" });
   }
 });
 
