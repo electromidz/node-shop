@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -31,5 +32,23 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+function userValidation(user) {
+  const schema = Joi.object({
+    name: Joi.string().min(3).max(100).required(),
+    email: Joi.string()
+      .min(3)
+      .max(320)
+      .required()
+      .pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+    phone: Joi.string()
+      .min(11)
+      .max(11)
+      .required()
+      .pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+    password: Joi.string().required().min(6).max(20),
+  });
+  return schema.validate(user);
+}
+
 const UserModel = mongoose.model("User", userSchema);
-module.exports = UserModel;
+module.exports = { UserModel, userValidation };
