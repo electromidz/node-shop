@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-const { userModel, userValidation, userValidation } = require("../models/user");
+const { UserModel, userValidation } = require("../models/user");
 
 async function hashPass(password) {
   const salt = await bcrypt.genSalt(10);
@@ -13,18 +13,18 @@ async function hashPass(password) {
 }
 
 router.post("/register", async (req, res) => {
-  const userValidation = userValidation(req.body);
-  console.log("Validation::", userValidation);
-  return 0;
+  const validation = userValidation(req.body);
+  if (validation.error) {
+    return res.status(404).send(validation.error.details[0].message);
+  }
   req.body.password = await hashPass(req.body.password);
-  const newUser = new userModel(req.body);
-  if (newUser) {
+  console.log(req.body);
+  const newUser = new UserModel(req.body);
+  try {
     await newUser.save();
-    res.status(201);
-    res.send(newUser);
-  } else {
-    res.status(404);
-    res.send({ error: "Invalid form" });
+    res.status(201).res.send(newUser);
+  } catch (err) {
+    res.status(404).res.send(err);
   }
 });
 router.post("/login", async (req, res) => {
