@@ -50,23 +50,23 @@ router.post("/login", async (req, res) => {
 
   const user = await bcrypt.compareSync(password, foundUser.password); // true
 
-  // if (user && foundUser) {
-  //   const token = jwt.sign(
-  //     { _id: foundUser._id, name: foundUser.name },
-  //     process.env.JWT_PRIVATE_KEY
-  //   );
-  //   const decode = jwt.decode(token);
-  //   console.log(decode);
+  if (user && foundUser) {
+    const token = jwt.sign(
+      { _id: foundUser._id, name: foundUser.name },
+      process.env.JWT_PRIVATE_KEY
+    );
+    const decode = jwt.decode(token);
+    console.log(decode);
 
-  //   res.status(200);
-  //   return res.send(token);
-  // } else if (!user) {
-  //   res.status(401);
-  //   res.send({ error: "Wrong password" });
-  // } else {
-  //   res.status(401);
-  //   res.send({ error: "Wrong password" });
-  // }
+    res.status(200);
+    return res.send(token);
+  } else if (!user) {
+    res.status(401);
+    res.send({ error: "Wrong password" });
+  } else {
+    res.status(401);
+    res.send({ error: "Wrong password" });
+  }
 });
 
 module.exports = router;
