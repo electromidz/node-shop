@@ -1,16 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const bcrypt = require("bcrypt");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 const { UserModel, userValidation } = require("../models/user");
-
-async function hashPass(password) {
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
-  return hash;
-}
 
 router.post("/register", async (req, res) => {
   const validation = userValidation(req.body);
@@ -24,7 +17,7 @@ router.post("/register", async (req, res) => {
     await newUser.save();
     res.status(201).res.send(newUser);
   } catch (err) {
-    res.status(404).res.send(err);
+    res.status(500).res.send({ error: "Somtthings went wrong" });
   }
 });
 router.post("/login", async (req, res) => {
