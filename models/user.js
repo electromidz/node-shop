@@ -38,6 +38,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+  user.password = await hashPassword(user.password);
+  next();
+});
+
 function userValidation(user) {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required(),
