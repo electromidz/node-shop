@@ -3,23 +3,25 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-const { UserModel, userValidation } = require("../models/user");
+const { UserModel, userValidation, hashPassword } = require("../models/user");
 
 router.post("/register", async (req, res) => {
   const validation = userValidation(req.body);
+  console.log("ZOD ERROR ::\n", validation);
   if (validation.error) {
     return res.status(404).send(validation.error.details[0].message);
   }
-  req.body.password = await hashPass(req.body.password);
+  req.body.password = await hashPassword(req.body.password);
   console.log(req.body);
   const newUser = new UserModel(req.body);
   try {
     await newUser.save();
-    res.status(201).res.send(newUser);
+    res.status(201).send(newUser);
   } catch (err) {
-    res.status(500).res.send({ error: "Somtthings went wrong" });
+    res.status(500).send({ error: "Somtthings went wrong" });
   }
 });
+
 router.post("/login", async (req, res) => {
   const { email, phone, password } = req.body;
   const foundUser = await userModel.findOne({

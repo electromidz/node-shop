@@ -3,11 +3,12 @@ const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const { z } = require("zod");
 
-async function hashPass(password) {
+async function hashPassword(password) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
   return hash;
 }
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -82,8 +83,10 @@ function userValidation(user) {
     user.password = await hashPassword(user.password);
     next();
   });
-  return schema.validate(user);
+  // return schema.validate(user);
+
+  return schema.parse(user);
 }
 
 const UserModel = mongoose.model("User", userSchema);
-module.exports = { UserModel, userValidation };
+module.exports = { UserModel, userValidation, hashPassword };
