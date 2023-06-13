@@ -39,39 +39,48 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const userZod = z.object({
-  name: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  password: z.string(),
-});
-userZod.required({
-  name: true,
-  phone: true,
-  password: true,
-});
-
-userSchema.pre("save", async function (next) {
-  const user = this;
-  if (!user.isModified("password")) return next();
-  user.password = await hashPassword(user.password);
-  next();
-});
-
 function userValidation(user) {
-  const schema = Joi.object({
-    name: Joi.string().min(3).max(100).required(),
-    email: Joi.string()
-      .min(3)
-      .max(320)
-      .required()
-      .pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
-    phone: Joi.string()
-      .min(11)
-      .max(11)
-      .required()
-      .pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
-    password: Joi.string().required().min(6).max(20),
+  // const schema = Joi.object({
+  //   name: Joi.string().min(3).max(100).required(),
+  //   email: Joi.string()
+  //     .min(3)
+  //     .max(320)
+  //     .required()
+  //     .pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+  //   phone: Joi.string()
+  //     .min(11)
+  //     .max(11)
+  //     .required()
+  //     .pattern(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+  //   password: Joi.string().required().min(6).max(20),
+  // });
+  const schema = z
+    .object({
+      name: z.string().min(3).max(100),
+      email: z
+        .string()
+        .min(3)
+        .max(320)
+        .regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+      phone: z
+        .string()
+        .min(11)
+        .max(11)
+        .regex(/09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/),
+      password: z.string().min(6).max(60),
+    })
+    .required({
+      name: true,
+      email: true,
+      phone: true,
+      password: true,
+    });
+
+  userSchema.pre("save", async function (next) {
+    const user = this;
+    if (!user.isModified("password")) return next();
+    user.password = await hashPassword(user.password);
+    next();
   });
   return schema.validate(user);
 }
