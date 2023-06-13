@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
+const { z } = require("zod");
 
 async function hashPass(password) {
   const salt = await bcrypt.genSalt(10);
@@ -36,6 +37,18 @@ const userSchema = new mongoose.Schema({
     maxLength: 60,
     required: true,
   },
+});
+
+const userZod = z.object({
+  name: z.string(),
+  email: z.string(),
+  phone: z.string(),
+  password: z.string(),
+});
+userZod.required({
+  name: true,
+  phone: true,
+  password: true,
 });
 
 userSchema.pre("save", async function (next) {
