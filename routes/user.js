@@ -7,7 +7,6 @@ const { UserModel, userValidation, hashPassword } = require("../models/user");
 
 router.post("/register", async (req, res) => {
   const validation = userValidation(req.body);
-  console.log("ZOD ERROR ::\n", validation);
   if (validation.error) {
     return res.status(404).send(validation.error.details[0].message);
   }
@@ -18,6 +17,7 @@ router.post("/register", async (req, res) => {
     await newUser.save();
     res.status(201).send(newUser);
   } catch (err) {
+    // TODO: must be handle error
     res.status(500).send({ error: "Somtthings went wrong" });
   }
 });
