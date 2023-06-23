@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const { z } = require("zod");
 
 async function hashPassword(password) {
   const salt = await bcrypt.genSalt(10);
@@ -69,8 +68,6 @@ function userValidation(user) {
     user.password = await hashPassword(user.password);
     next();
   });
-  // return schema.validate(user);
-
   return schema.parse(user);
 }
 
