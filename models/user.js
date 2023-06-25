@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-// async function hashPassword(password) {
-//   const salt = await bcrypt.genSalt(10);
-//   const hash = await bcrypt.hash(password, salt);
-//   return hash;
+async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
 }
 
 const userSchema = new mongoose.Schema({
