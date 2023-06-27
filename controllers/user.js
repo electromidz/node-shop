@@ -15,15 +15,16 @@ module.exports = {
       res.status(201).send(newUser);
     } catch (err) {
       // TODO: must be handle error
-      res.status(500).send({ error: "Somtthings went wrong" });
+      res.status(500).send({ error: "Somethings went wrong" });
     }
   },
   login: async function (req, res) {
     const { email, phone, password } = req.body;
-    const foundUser = await userModel.findOne({
-      $or: [{ email }, { phone }, { password }],
-    });
+    // const foundUser = await userModel.findOne({
+    //   $or: [{ email }, { phone }, { password }],
+    // });
 
+    console.log("FOUND USER\n\r", req.body);
     const user = await bcrypt.compareSync(password, foundUser.password); // true
 
     if (user && foundUser) {
