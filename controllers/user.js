@@ -35,14 +35,14 @@ module.exports = {
       const decode = jwt.decode(token);
       console.log(decode);
 
-      res.status(200);
-      return res.send(token);
-    } else if (!user) {
-      res.status(401);
-      res.send({ error: "Wrong password" });
-    } else {
-      res.status(401);
-      res.send({ error: "Wrong password" });
+      //   res.status(200);
+      //   return res.send(token);
+      // } else if (!user) {
+      //   res.status(401);
+      //   res.send({ error: "Wrong password" });
+      // } else {
+      //   res.status(401);
+      //   res.send({ error: "Wrong password" });
     }
   },
 };
