@@ -1,5 +1,6 @@
 const { UserModel, userValidation, hashPassword } = require("../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   register: async function (req, res) {
@@ -19,13 +20,13 @@ module.exports = {
     }
   },
   login: async function (req, res) {
+    const userModel = new UserModel(req.body);
     const { email, phone, password } = req.body;
-    // const foundUser = await userModel.findOne({
-    //   $or: [{ email }, { phone }, { password }],
-    // });
+    const foundUser = await UserModel.findOne({
+      $or: [{ email }, { phone }, { password }],
+    });
 
-    console.log("FOUND USER\n\r", req.body);
-    const user = await bcrypt.compareSync(password, foundUser.password); // true
+    const user = await bcrypt.compareSync(password, foundUser.password);
 
     if (user && foundUser) {
       const token = jwt.sign(

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 async function hashPassword(password) {
   const salt = await bcrypt.genSalt(10);
