@@ -38,12 +38,12 @@ module.exports = {
 
       res.status(200);
       return res.send(token);
-    // } else if (!user) {
-    //   res.status(401);
-    //   res.send({ error: "Wrong password" });
-    // } else {
-    //   res.status(401);
-    //   res.send({ error: "Wrong password" });
-    // }
+    } else if (!user) {
+      res.status(401);
+      res.send({ error: "Wrong password" });
+    } else {
+      res.status(401);
+      res.send({ error: "Wrong password" });
+    }
   },
 };
