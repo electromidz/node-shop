@@ -22,9 +22,15 @@ module.exports = {
   login: async function (req, res) {
     const userModel = new UserModel(req.body);
     const { email, phone, password } = req.body;
+
     const foundUser = await UserModel.findOne({
       $or: [{ email }, { phone }, { password }],
     });
+
+    console.log(foundUser);
+    if (foundUser === null) {
+      return res.status(401).send({ error: "User not found!" });
+    }
 
     const user = await bcrypt.compareSync(password, foundUser.password);
 

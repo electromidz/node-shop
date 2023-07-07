@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
 });
 
 function userValidation(user) {
+  console.log(user);
   const schema = z
     .object({
       name: z.string().min(3).max(100),
