@@ -32,7 +32,8 @@ module.exports = {
       return res.status(401).send({ error: "User not found!" });
     }
 
-    const user = await bcrypt.compareSync(password, foundUser.password);
+    // const user = await bcrypt.compareSync(password, foundUser.password);
+    const user = await foundUser.comparePassword(password);
 
     if (user && foundUser) {
       const token = jwt.sign(

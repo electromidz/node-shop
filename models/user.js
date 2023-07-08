@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.method.comparePassword = async function (password, cb) {
+  return await bcrypt.compare(password, this.password);
+};
+
 function userValidation(user) {
   console.log(user);
   const schema = z
