@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 async function hashPassword(password) {
   const salt = await bcrypt.genSalt(10);
@@ -37,7 +38,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.method.comparePassword = async function (password, cb) {
+userSchema.methods.comparePassword = async function (password, cb) {
   return await bcrypt.compare(password, this.password);
 };
 
