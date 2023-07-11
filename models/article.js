@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 import {UserSchema} from './user';
+const {Schema} = mongoose;
 
-const userSchema = new UserSchema();
-const articleSchema = new mongoose,Schema({
+const ArticleModel= mongoose.model("article", new Schema({
     title: {
         type:String
-        required: true
+        required: true,
+        minLength:3,
+        maxLength:300,
     },
     content :{
         type:String
@@ -13,5 +15,5 @@ const articleSchema = new mongoose,Schema({
      owner: userSchema
 })
 
-const ArticleSchema = mongoose.model("Article", articleSchema);
+;
  module.exports = {ArticleSchema}
