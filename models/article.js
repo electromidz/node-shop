@@ -15,4 +15,4 @@ const ArticleModel= mongoose.model("article", new Schema({
      owner: userSchema
 })
 
-module.exports = { ArticleSchema };
+module.exports = { ArticleModel};
