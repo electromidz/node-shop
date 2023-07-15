@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-import { UserSchema } from "./user";
+import { UserModel} from "./user";
 const { Schema } = mongoose;
 
 const ArticleModel= mongoose.model("article", new Schema({
