@@ -12,7 +12,7 @@ const ArticleModel= mongoose.model("article", new Schema({
     content :{
         type:String
     }
-     owner: userSchema
+     owner:{type:Schema.Types.ObjectId, ref:user} 
 })
 
 module.exports = { ArticleModel};
