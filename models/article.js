@@ -10,9 +10,15 @@ const ArticleModel= mongoose.model("article", new Schema({
         maxLength:300,
     },
     content :{
-        type:String
-    }
-     owner:{type:Schema.Types.ObjectId, ref:UserModel} 
+        type:String,
+required: true,
+    },
+     owner:{type:Schema.Types.ObjectId, ref:'user'} ,
+     date:{
+        type:Date,
+        default:Date.now(),
+        required:true
+     }
 })
 
 module.exports = { ArticleModel};
