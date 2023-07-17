@@ -1,5 +1,10 @@
 module.exports = {
   postArticle: async function (req, res) {
-    res.status(201), send({ message: "test" });
+    console.log("POST Article");
+    res.status(201).send({ message: "test" });
+  },
+  getArticle: async function (req, res) {
+    console.log("GET Article");
+    res.status(200).send({ message: "test" });
   },
 };
