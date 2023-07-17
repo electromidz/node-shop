@@ -31,4 +31,4 @@ app.listen(process.env.SERVER_PORT, () => {
 });
 
 app.use("/user", userRouter);
-app.use("article", articleRouter);
+app.use("/article", articleRouter);
