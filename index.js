@@ -7,6 +7,7 @@ app.use(authMiddleware);
 app.use(express.json());
 
 const userRouter = require("./routes/user");
+const articleRouter = require("./routes/article");
 
 const mongoose = require("mongoose");
 
@@ -30,3 +31,4 @@ app.listen(process.env.SERVER_PORT, () => {
 });
 
 app.use("/user", userRouter);
+app.use("article", articleRouter);
