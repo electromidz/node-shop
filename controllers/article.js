@@ -5,6 +5,6 @@ module.exports = {
   },
   getArticle: async function (req, res) {
     console.log("GET Article");
-    res.status(200).send({ message: "test" });
+    res.status(201).send({ message: "test" });
   },
 };
