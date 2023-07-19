@@ -30,8 +30,5 @@ app.listen(process.env.SERVER_PORT, () => {
   console.log(`App listening on port [${process.env.SERVER_PORT}] ... 🐳`);
 });
 
-// app.use("/user", userRouter);
+app.use("/user", userRouter);
 app.use("/article", articleRouter);
-// app.get("/article", (req, res) => {
-//   console.log(req);
-// });
