@@ -27,10 +27,10 @@ const ArticleModel = mongoose.model(
 function articleValidation(article) {
   const schema = z
     .object({
-      title: z.String().min(3).max(255),
-      content: z.String().min(100),
+      title: z.string().min(3).max(255),
+      content: z.string().min(100),
       owner: z.number(),
-      date: z.Date(),
+      date: z.date(),
     })
     .required({
       title: true,
@@ -38,6 +38,8 @@ function articleValidation(article) {
       owner: true,
       date: true,
     });
+
+  return schema.parse(article);
 }
 
 module.exports = { ArticleModel, articleValidation };
