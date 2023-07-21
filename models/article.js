@@ -29,8 +29,8 @@ function articleValidation(article) {
     .object({
       title: z.string().min(3).max(255),
       content: z.string().min(100),
-      owner: z.number(),
-      date: z.date(),
+      owner: z.string(),
+      date: z.number(),
     })
     .required({
       title: true,
