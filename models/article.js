@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-import { UserModel } from "./user";
 const { Schema } = mongoose;
 
 const ArticleModel = mongoose.model(
@@ -23,5 +22,21 @@ const ArticleModel = mongoose.model(
     },
   })
 );
+
+function articleValidation(article) {
+  const schema = z
+    .object({
+      title: z.String().min(3).max(255),
+      constent: z.String().min(100),
+      owner: z.number(),
+      date: z.Date(),
+    })
+    .required({
+      title: true,
+      content: true,
+      owner: true,
+      date: true,
+    });
+}
 
 module.exports = { ArticleModel };
