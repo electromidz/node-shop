@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const { z } = require("zod");
 
 const ArticleModel = mongoose.model(
   "article",
@@ -27,7 +28,7 @@ function articleValidation(article) {
   const schema = z
     .object({
       title: z.String().min(3).max(255),
-      constent: z.String().min(100),
+      content: z.String().min(100),
       owner: z.number(),
       date: z.Date(),
     })
