@@ -39,4 +39,4 @@ function articleValidation(article) {
     });
 }
 
-module.exports = { ArticleModel };
+module.exports = { ArticleModel, articleValidation };
