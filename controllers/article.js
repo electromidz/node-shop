@@ -8,6 +8,6 @@ module.exports = {
   },
   getArticle: async function (req, res) {
     console.log("GET Article");
-    // res.status(201).send({ result: [] });
+    res.status(201).send({ result: [] });
   },
 };
