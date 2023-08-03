@@ -1,6 +1,27 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const { z } = require("zod");
+const user = require("user");
+
+const articleSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    minLength: 3,
+    maxLength: 100,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  owner: {
+    type: Schema.types.ObjectId,
+    ref: "user",
+  },
+  data: {
+    type: String,
+  },
+});
 
 const ArticleModel = mongoose.model(
   "article",
@@ -9,7 +30,7 @@ const ArticleModel = mongoose.model(
       type: String,
       required: true,
       minLength: 3,
-      maxLength: 300,
+      maxLength: 100,
     },
     content: {
       type: String,
@@ -41,5 +62,7 @@ function articleValidation(article) {
 
   return schema.parse(article);
 }
+
+var Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = { ArticleModel, articleValidation };

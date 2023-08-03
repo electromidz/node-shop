@@ -4,7 +4,7 @@ module.exports = {
     console.log("POST Article", req.body);
     // const validation = articleValidation(req.body);
     const articleSchema = ArticleModel(req.body);
-    res.status(201).send({ message: "test" });
+    res.status(201).send({ message: articleSchema });
   },
   getArticle: async function (req, res) {
     // console.log("GET Article");
