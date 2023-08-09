@@ -63,6 +63,6 @@ function articleValidation(article) {
   return schema.parse(article);
 }
 
-var Article = mongoose.model("Article", ArticleSchema);
+// var Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = { ArticleModel, articleValidation, Article };
