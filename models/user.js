@@ -67,13 +67,13 @@ function userValidation(user) {
       password: true,
     });
 
-  // userSchema.pre("save", async function (next) {
-  //   const user = this;
-  //   if (!user.isModified("password")) return next();
-  //   user.password = await hashPassword(user.password);
-  //   next();
-  // });
-  // return schema.parse(user);
+  userSchema.pre("save", async function (next) {
+    const user = this;
+    if (!user.isModified("password")) return next();
+    user.password = await hashPassword(user.password);
+    next();
+  });
+  return schema.parse(user);
 }
 
 const UserModel = mongoose.model("User", userSchema);
