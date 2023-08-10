@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const { z } = require("zod");
-const user = require("user");
+// const user = require("user");
 
 const articleSchema = new mongoose.Schema({
   title: {
@@ -15,7 +15,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
   owner: {
-    type: Schema.types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "user",
   },
   data: {
@@ -23,27 +23,27 @@ const articleSchema = new mongoose.Schema({
   },
 });
 
-const ArticleModel = mongoose.model(
-  "article",
-  new Schema({
-    title: {
-      type: String,
-      required: true,
-      minLength: 3,
-      maxLength: 100,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    owner: { type: Schema.Types.ObjectId, ref: "user" },
-    date: {
-      type: Date,
-      default: Date.now(),
-      required: true,
-    },
-  })
-);
+// const ArticleModel = mongoose.model(
+//   "article",
+//   new Schema({
+//     title: {
+//       type: String,
+//       required: true,
+//       minLength: 3,
+//       maxLength: 100,
+//     },
+//     content: {
+//       type: String,
+//       required: true,
+//     },
+//     owner: { type: Schema.Types.ObjectId, ref: "user" },
+//     date: {
+//       type: Date,
+//       default: Date.now(),
+//       required: true,
+//     },
+//   })
+// );
 
 function articleValidation(article) {
   const schema = z
@@ -63,6 +63,6 @@ function articleValidation(article) {
   return schema.parse(article);
 }
 
-var Article = mongoose.model("Article", ArticleSchema);
+var ArticleModel = mongoose.model("Article", articleSchema);
 
-module.exports = { ArticleModel, articleValidation, Article };
+module.exports = { ArticleModel, articleValidation };
