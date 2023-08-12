@@ -13,6 +13,9 @@ module.exports = {
     }
   },
   getArticle: async function (req, res) {
+    return new ArticleModel.find({}, function (err, res) {
+      console.log(res);
+    });
     res.status(201).send({ result: [] });
   },
 };
