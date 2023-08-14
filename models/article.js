@@ -16,6 +16,7 @@ const articleSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",
+    required: true,
   },
   product: {
     type: Schema.Types.ObjectId,
