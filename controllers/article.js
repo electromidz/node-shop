@@ -18,4 +18,9 @@ module.exports = {
     });
     res.status(201).send({ result: [] });
   },
+  putArticle: async function (req, res) {
+    return new ArticleModel.findOne({id:req.id}, function (err, res) {
+      console.log(res)
+    }
+  }
 };
