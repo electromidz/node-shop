@@ -37,7 +37,21 @@ var ProductSchema = new mongoose.Schema(
 );
 
 function productValidation(product) {
-  const schema = z.object({});
+  const schema = z.object({
+    name: z.string(),
+    category: z.string(),
+    subcategory: [
+      z.object({
+        type: z.string(),
+        color: [
+          z.object({
+            name: z.string(),
+            image: z.string(),
+          }),
+        ],
+      }),
+    ],
+  });
 }
 
 export default mongoose.model("Product", ProductSchema);
