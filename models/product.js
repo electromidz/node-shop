@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 //Schema Defination and model.js
 var ProductSchema = new mongoose.Schema(
   {
@@ -33,5 +35,9 @@ var ProductSchema = new mongoose.Schema(
   { versionKey: false },
   { strict: false }
 );
+
+function productValidation(product) {
+  const schema = z.object({});
+}
 
 export default mongoose.model("Product", ProductSchema);
