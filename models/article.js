@@ -28,6 +28,8 @@ const articleSchema = new Schema({
   created_at: { type: Date },
   updated_at: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
+  { versionKey: false },
+  { strict: false }
 });
 
 function articleValidation(article) {
