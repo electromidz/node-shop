@@ -18,10 +18,10 @@ const articleSchema = new Schema({
     ref: "user",
     required: true,
   },
-  product: {
-    type: Schema.Types.ObjectId,
-    ref:'product'
-  }
+  // product: {
+  //   type: Schema.Types.ObjectId,
+  //   ref:'product'
+  // }
   data: {
     type: String,
   },
