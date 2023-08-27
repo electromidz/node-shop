@@ -52,4 +52,4 @@ function articleValidation(article) {
 
 var ArticleModel = mongoose.model("Article", articleSchema);
 
-// module.exports = { ArticleModel, articleValidation };
+module.exports = { ArticleModel, articleValidation };
