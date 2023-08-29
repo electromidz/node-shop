@@ -40,12 +40,12 @@ function articleValidation(article) {
       owner: z.string(),
       date: z.number(),
     })
-    .required({
-      title: true,
-      content: true,
-      owner: true,
-      date: true,
-    });
+    // .required({
+    //   title: true,
+    //   content: true,
+    //   owner: true,
+    //   date: true,
+    // });
 
   return schema.parse(article);
 }
