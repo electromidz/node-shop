@@ -27,13 +27,13 @@ var ProductSchema = new mongoose.Schema(
         ],
       },
     ],
-  //   description: String,
-  //   created_at: { type: Date },
-  //   updated_at: { type: Date, default: Date.now },
-  //   updated: { type: Date, default: Date.now },
-  // },
-  // { versionKey: false },
-  // { strict: false }
+    description: String,
+    created_at: { type: Date },
+    updated_at: { type: Date, default: Date.now },
+    updated: { type: Date, default: Date.now },
+  },
+  { versionKey: false },
+  { strict: false }
 );
 
 function productValidation(product) {
