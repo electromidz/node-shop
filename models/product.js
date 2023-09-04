@@ -38,9 +38,9 @@ var ProductSchema = new mongoose.Schema(
 
 function productValidation(product) {
   const schema = z.object({
-    // name: z.string(),
-    // category: z.string(),
-    // subcategory: [
+    name: z.string(),
+    category: z.string(),
+    subcategory: [
       z.object({
         type: z.string(),
         color: [
