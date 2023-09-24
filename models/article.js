@@ -30,7 +30,7 @@ const { z } = require("zod");
 //   updated: { type: Date, default: Date.now },
 //   { versionKey: false },
 //   { strict: false }
-});
+//});
 
 function articleValidation(article) {
   const schema = z
