@@ -1,4 +1,4 @@
-//import { z } from "zod";
+import { z } from "zod";
 
 //Schema Defination and model.js
 var ProductSchema = new mongoose.Schema(
