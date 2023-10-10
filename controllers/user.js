@@ -1,5 +1,5 @@
 const { UserModel, userValidation, hashPassword } = require("../models/user");
-const jwt = require("jsonwebtoken");
+//const jwt = require("jsonwebtoken");
 
 module.exports = {
   register: async function (req, res) {
