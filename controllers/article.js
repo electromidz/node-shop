@@ -1,4 +1,4 @@
-const { ArticleModel, articleValidation } = require("../models/article");
+//const { ArticleModel, articleValidation } = require("../models/article");
 module.exports = {
   postArticle: async function (req, res) {
     const validation = articleValidation(req.body);
@@ -7,7 +7,7 @@ module.exports = {
       await articleSchema.save();
       res
         .status(201)
-        .send({ hasError: false, result: [{ articleSchema: articleSchema }] });
+        .send({ hasError: false, result: [{ articleSchema: articleSchema }] }); lmk
     } catch (error) {
       res.status(500).send({ error: error });
     }
