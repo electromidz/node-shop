@@ -1,4 +1,4 @@
-const { ArticleModel, articleValidation } = require("../models/article");
+//const { ArticleModel, articleValidation } = require("../models/article");
 module.exports = {
   postArticle: async function (req, res) {
     const validation = articleValidation(req.body);
